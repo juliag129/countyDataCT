@@ -23,6 +23,23 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             id: 'mapbox/light-v9'
         }).addTo(map);
 
+        // control that displays county info on hover
+        let info = L.control();
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+        };
+
+        // update the control based on feature properties passed
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>CT County Population</h4>' +  (props ?
+                '<b>' + props.name + '</b><br />' + props.population : 'Hover over a county');
+        };
+
+        info.addTo(map);
+
         // color each county based on population
         function getColor(p) {
             return p > 900000  ? '#800026' :
@@ -47,7 +64,7 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
         L.geoJSON(counties, {style: style}).addTo(map);
 
         // highlight county when mouseover
-        function highlightCounty(e) {
+        function highlightFeature(e) {
             let layer = e.target;
 
             layer.setStyle({
@@ -59,19 +76,21 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
+
+            info.update(layer.feature.properties);
         }
 
         let geojson;
-        geojson = L.geoJSON(counties);
 
-        function resetCounty(e) {
+        function resetHighlight(e) {
             geojson.resetStyle(e.target);
+            info.update();
         }
 
         function onEachFeature(feature, layer) {
             layer.on({
-                mouseover: highlightCounty,
-                mouseout: resetCounty
+                mouseover: highlightFeature,
+                mouseout: resetHighlight
             });
         }
 
@@ -79,23 +98,6 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             style: style,
             onEachFeature: onEachFeature
         }).addTo(map);
-
-        // control that shows county info on hover
-        var info = L.control();
-
-        info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
-
-        info.update = function (props) {
-            this._div.innerHTML = '<h4>CT County Population</h4>' +  (props ?
-                '<b>' + props.name + '</b><br />' + props.population + ' people / mi<sup>2</sup>'
-                : 'Hover over a county');
-        };
-
-        info.addTo(map);
 
     });
 });
