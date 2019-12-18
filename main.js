@@ -1,8 +1,9 @@
-// load county population data
-d3.dsv(',','data.csv',function(d) {
+// load the data
+d3.dsv(',','employmentbyindustry.csv',function(d) {
     return {
         county: d.County,
-        population: +d.Population
+        industry: d.Industry,
+        value: d.Value
     };
 }).then(function(data) {
     // load county geojson file

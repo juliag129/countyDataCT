@@ -1,4 +1,4 @@
-"Town/County","FIPS","Year","NAICS Code","Industry Name","Rank","Measure Type","Variable","Value"
+"County","FIPS","Year","NAICS Code","Industry","Rank","Measure Type","Variable","Value"
 "Andover","0901301080",2014,"23","Construction",-1,"Number","Annual Average Employment",43.17
 "Andover","0901301080",2014,"23","Construction",-1,"US Dollars","Annual Average Wage",55289.84
 "Andover","0901301080",2014,"23","Construction",-1,"Number","Number of Employers",12
