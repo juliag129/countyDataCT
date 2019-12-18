@@ -22,7 +22,27 @@ d3.dsv(',','data.csv',function(d) {
             id: 'mapbox/light-v9'
         }).addTo(map);
 
-        // add data from geojson  to map
-        L.geoJSON(counties).addTo(map);
+        // color each county based on population
+        function getColor(p) {
+            return p > 900000  ? '#800026' :
+                   p > 800000  ? '#BD0026' :
+                   p > 200000  ? '#E31A1C' :
+                   p > 100000  ? '#FC4E2A' :
+                                 '#FD8D3C';
+        }
+
+        function style(feature) {
+            return {
+                fillColor: getColor(feature.properties.POPULATION),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.75
+            };
+        }
+
+        // add data from geojson to map
+        L.geoJSON(counties, {style: style}).addTo(map);
     });
 });

@@ -1515,6 +1515,7 @@
       "properties": {
         "NAME": "Fairfield",
         "LSAD": "County",
+        "POPULATION": 943823,
         "CENSUSAREA": 624.89,
         "GEO_ID": "0500000US09001",
         "COUNTY": "001",
@@ -2482,6 +2483,7 @@
       "properties": {
         "NAME": "Hartford",
         "LSAD": "County",
+        "POPULATION": 892697,
         "CENSUSAREA": 735.097,
         "GEO_ID": "0500000US09003",
         "COUNTY": "003",
@@ -3273,6 +3275,7 @@
       "properties": {
         "NAME": "Litchfield",
         "LSAD": "County",
+        "POPULATION": 181111,
         "CENSUSAREA": 920.56,
         "GEO_ID": "0500000US09005",
         "COUNTY": "005",
@@ -4288,6 +4291,7 @@
       "properties": {
         "NAME": "Middlesex",
         "LSAD": "County",
+        "POPULATION": 162682,
         "CENSUSAREA": 369.301,
         "GEO_ID": "0500000US09007",
         "COUNTY": "007",
@@ -6283,6 +6287,7 @@
       "properties": {
         "NAME": "New Haven",
         "LSAD": "County",
+        "POPULATION": 857620,
         "CENSUSAREA": 604.506,
         "GEO_ID": "0500000US09009",
         "COUNTY": "009",
@@ -7386,6 +7391,7 @@
       "properties": {
         "NAME": "New London",
         "LSAD": "County",
+        "POPULATION": 266784,
         "CENSUSAREA": 664.878,
         "GEO_ID": "0500000US09011",
         "COUNTY": "011",
@@ -8209,6 +8215,7 @@
       "properties": {
         "NAME": "Tolland",
         "LSAD": "County",
+        "POPULATION": 150921,
         "CENSUSAREA": 410.214,
         "GEO_ID": "0500000US09013",
         "COUNTY": "013",
@@ -8728,6 +8735,7 @@
       "properties": {
         "NAME": "Windham",
         "LSAD": "County",
+        "POPULATION": 117027,
         "CENSUSAREA": 512.91,
         "GEO_ID": "0500000US09015",
         "COUNTY": "015",
