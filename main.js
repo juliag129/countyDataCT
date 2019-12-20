@@ -1,10 +1,19 @@
 // load the data
 d3.dsv(',','employmentbyindustry.csv',function(d) {
-    return {
-        county: d.County,
-        industry: d.Industry,
-        value: d.Value
-    };
+    if(d.Year=="2018" && d.County=="Hartford County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="Litchfield County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="Tolland County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="Fairfield County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="New Haven County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="New London County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="Middlesex County" && d.Variable=="Annual Average Employment" ||
+       d.Year=="2018" && d.County=="Windham County" && d.Variable=="Annual Average Employment") {
+       return {
+           county: d.County,
+           industry: d.Industry,
+           value: +d.Value
+       }
+    }
 }).then(function(data) {
     // load county geojson file
     d3.json('ct-counties.geojson').then(function (counties) {
