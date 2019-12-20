@@ -23,7 +23,7 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             id: 'mapbox/light-v9'
         }).addTo(map);
 
-        // control that displays county info on hover
+        // basic instructions
         let info = L.control();
 
         info.onAdd = function (map) {
@@ -32,10 +32,8 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             return this._div;
         };
 
-        // update the control based on feature properties passed
-        info.update = function (props) {
-            this._div.innerHTML = '<h4>CT County Population</h4>' +  (props ?
-                '<b>' + props.name + '</b><br />' + props.population : 'Hover over a county');
+        info.update = function () {
+            this._div.innerHTML = '<h4>CT County Data</h4>' + 'Click on a county to see more';
         };
 
         info.addTo(map);
@@ -76,15 +74,12 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
-
-            info.update(layer.feature.properties);
         }
 
         let geojson;
 
         function resetHighlight(e) {
             geojson.resetStyle(e.target);
-            info.update();
         }
 
         function onEachFeature(feature, layer) {
@@ -92,6 +87,10 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
                 mouseover: highlightFeature,
                 mouseout: resetHighlight
             });
+
+            let popupContent = "This is " + feature.properties.NAME + " county" +
+                "<br>Population is " + feature.properties.POPULATION;
+            layer.bindPopup(popupContent);
         }
 
         geojson = L.geoJSON(counties, {
