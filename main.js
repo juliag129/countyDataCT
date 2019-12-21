@@ -22,7 +22,7 @@ d3.json('ct-counties.geojson').then(function (counties) {
         marker.remove();
     });
 
-    // basic instructions
+    // update county info on mouseover
     let info = L.control();
 
     info.onAdd = function (map) {
@@ -33,7 +33,9 @@ d3.json('ct-counties.geojson').then(function (counties) {
 
     info.update = function (props) {
         this._div.innerHTML = '<h4>CT Counties</h4>' +  (props ?
-            '<b>' + props.NAME + ' County</b><br />Population: ' + props.POPULATION : 'Hover over a county');
+            '<b>' + props.NAME + ' County</b><br />Population: ' + props.POPULATION
+            : 'Hover over a county to see its <br>population or double click to see<br>' +
+            'the annual average employment<br> for each county by industry');
     };
 
     info.addTo(map);
@@ -100,8 +102,8 @@ d3.json('ct-counties.geojson').then(function (counties) {
         e.stopPropagation();
     }
 
-    // on right click outside an area, show entire graph
-    map.on("contextmenu", function (e) {
+    // show entire graph when double clicked
+    map.on("dblclick", function (e) {
         marker.setLatLng(e.latlng);
         d3.text("./bar.html").then(function (d) {
             let html = d;
@@ -118,7 +120,7 @@ d3.json('ct-counties.geojson').then(function (counties) {
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            contextmenu: graph
+            dblclick: graph
         });
     }
 
@@ -126,4 +128,5 @@ d3.json('ct-counties.geojson').then(function (counties) {
         style: style,
         onEachFeature: onEachFeature
     }).addTo(map);
+
 });
