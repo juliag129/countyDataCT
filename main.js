@@ -110,8 +110,8 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
         function graph() {
             var svg = d3.select("svg"),
                 margin = {top: 20, right: 20, bottom: 30, left: 60},
-                width = +svg.attr("width") - margin.left - margin.right,
-                height = +svg.attr("height") - margin.top - margin.bottom;
+                width = 300,
+                height = 150;
 
             var x = d3.scaleBand().range([0, width]).padding(0.1),
                 y = d3.scaleLinear().range([height, 0]);
@@ -125,7 +125,13 @@ d3.dsv(',','employmentbyindustry.csv',function(d) {
             g.append("g")
                 .attr("class", "axis axis--x")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                .attr("y", 0)
+                .attr("x", 9)
+                .attr("dy", ".35em")
+                .attr("transform", "rotate(90)")
+                .style("text-anchor", "start");
 
             g.append("g")
                 .attr("class", "axis axis--y")
